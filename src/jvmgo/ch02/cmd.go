@@ -16,6 +16,8 @@ type Cmd struct {
 	cpOption 		string
 	class			string
 	args			[]string
+	// 手动指定 jre 目录的位置
+	XjreOption		string
 }
 
 // 定义解析命令行参数
@@ -29,6 +31,7 @@ func parseCmd() *Cmd {
 	flag.BoolVar(&cmd.versionFlag, "version", false, "print help message")
 	flag.StringVar(&cmd.cpOption, "classpath", "", "classpath")
 	flag.StringVar(&cmd.cpOption, "cp", "", "classpath")
+	flag.StringVar(&cmd.cpOption, "Xjre", "", "path to jre")
 	flag.Parse()
 
 	args := flag.Args()
