@@ -1,7 +1,9 @@
 package stores
 
-import "jvmgo/ch05/instructions/base"
-import "jvmgo/ch05/rtda"
+import (
+    "jvmgo/ch05/instructions/base"
+    "jvmgo/ch05/rtda"
+)
 
 // Store reference into local variable
 type ASTORE struct{ base.Index8Instruction }

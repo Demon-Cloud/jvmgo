@@ -5,7 +5,7 @@ import (
 )
 
 type ClassFile struct {
-    magic           uint32
+    // magic           uint32
     minorVersion    uint16
     majorVersion    uint16
     constantPool    ConstantPool
@@ -53,8 +53,8 @@ func (self *ClassFile) read(reader *ClassReader) {
 
 // 验证 magic == '0xCAFEBABE',判断文件是否为class文件
 func (self *ClassFile) readAndCheckMagic(reader *ClassReader) {
-    self.magic = reader.readUint32()
-    if self.magic != 0xCAFEBABE {
+    magic := reader.readUint32()
+    if magic != 0xCAFEBABE {
         panic("java.lang.ClassFormatError: magic!")
     }
 }

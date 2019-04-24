@@ -31,6 +31,10 @@ func readMember(reader *ClassReader, cp ConstantPool) *MemberInfo {
     }
 }
 
+func (self *MemberInfo) AccessFlags() uint16 {
+    return self.accessFlags
+}
+
 // 从常量池中查找字段或方法名
 func (self *MemberInfo) Name() string {
     return self.cp.getUtf8(self.nameIndex)
@@ -39,4 +43,16 @@ func (self *MemberInfo) Name() string {
 // 从常量池中查找字段或方法描述
 func (self *MemberInfo) Descriptor() string {
     return self.cp.getUtf8(self.descriptorIndex)
+}
+
+// 获取 MemberInfo 的 Code 属性
+func (self *MemberInfo) CodeAttribute() *CodeAttribute {
+    for _, attrInfo := range self.attributes {
+        switch attrInfo.(type) {
+        case *CodeAttribute:
+            return attrInfo.(*CodeAttribute)
+        }
+    }
+
+    return nil
 }

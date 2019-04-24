@@ -1,7 +1,9 @@
 package stack
 
-import "jvmgo/ch05/instructions/base"
-import "jvmgo/ch05/rtda"
+import (
+    "jvmgo/ch05/instructions/base"
+    "jvmgo/ch05/rtda"
+)
 
 // Duplicate the top operand stack value
 type DUP struct{ base.NoOperandsInstruction }
@@ -45,6 +47,7 @@ func (self *DUP_X1) Execute(frame *rtda.Frame) {
 type DUP_X2 struct{ base.NoOperandsInstruction }
 
 /*
+复制栈顶数值，并压入栈顶3次
 bottom -> top
 [...][c][b][a]
        _____/
@@ -67,6 +70,7 @@ func (self *DUP_X2) Execute(frame *rtda.Frame) {
 type DUP2 struct{ base.NoOperandsInstruction }
 
 /*
+复制栈顶2个数值，并压入栈顶
 bottom -> top
 [...][c][b][a]____
           \____   |

@@ -3,6 +3,7 @@ package classpath
 import (
 	"os"
 	"path/filepath"
+	"fmt"
 )
 
 type Classpath struct {

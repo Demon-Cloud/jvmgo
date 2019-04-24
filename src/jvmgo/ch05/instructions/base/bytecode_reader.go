@@ -15,6 +15,10 @@ func (self *BytecodeReader) Reset(code []byte, pc int) {
     self.pc = pc
 }
 
+func (self *BytecodeReader) PC() int {
+    return self.pc
+}
+
 func (self *BytecodeReader) ReadUint8() uint8 {
     i := self.code[self.pc]
     self.pc++
@@ -54,7 +58,7 @@ func (self *BytecodeReader) ReadInt32s(n int32) []int32 {
 
 // used by lookupswitch and tableswitch
 func (self *BytecodeReader) SkipPadding() {
-    for self.pc%4 != 0 {
+    for self.pc % 4 != 0 {
         self.ReadUint8()
     }
 }

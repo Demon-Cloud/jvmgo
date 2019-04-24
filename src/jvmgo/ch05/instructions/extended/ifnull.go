@@ -1,7 +1,9 @@
 package extended
 
-import "jvmgo/ch05/instructions/base"
-import "jvmgo/ch05/rtda"
+import (
+    "jvmgo/ch05/instructions/base"
+    "jvmgo/ch05/rtda"
+)
 
 // Branch if reference is null
 type IFNULL struct{ base.BranchInstruction }
