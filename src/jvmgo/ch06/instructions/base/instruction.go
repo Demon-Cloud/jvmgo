@@ -2,7 +2,7 @@
 package base
 
 import (
-    "jvmgo/ch05/rtda"
+    "jvmgo/ch06/rtda"
 )
 
 // 操作指令接口

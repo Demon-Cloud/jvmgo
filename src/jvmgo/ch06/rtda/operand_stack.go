@@ -3,6 +3,7 @@ package rtda
 
 import (
     "math"
+    "jvmgo/ch06/rtda/heap"
 )
 
 // 操作数栈
@@ -68,12 +69,12 @@ func (self *OperandStack) PopDouble() float64 {
     return math.Float64frombits(bits)
 }
 
-func (self *OperandStack) PushRef(ref *Object) {
+func (self *OperandStack) PushRef(ref *heap.Object) {
     self.slots[self.size].ref = ref
     self.size++
 }
 
-func (self *OperandStack) PopRef() *Object {
+func (self *OperandStack) PopRef() *heap.Object {
     self.size--
     ref := self.slots[self.size].ref
     // 为了让 Go 垃圾收集器回收 Object 结构体实例

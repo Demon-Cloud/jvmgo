@@ -1,7 +1,7 @@
 package base
 
 import (
-    "jvmgo/ch05/rtda"
+    "jvmgo/ch06/rtda"
 )
 
 func Branch(frame *rtda.Frame, offset int) {
