@@ -37,7 +37,7 @@ func (self *ClassLoader) loadNonArrayClass(name string) *Class {
 
     // 链接
     link(class)
-    fmt.Printg("[Loaded %s from %s]\n", name, entry)
+    fmt.Printf("[Loaded %s from %s]\n", name, entry)
     return class
 }
 
@@ -62,7 +62,8 @@ func (self *ClassLoader) defineClass(data []byte) *Class {
     return class
 }
 
-func (self *ClassLoader) parseClass(data []byte) *Class {
+func parseClass(data []byte) *Class {
+    cf, err := classfile.Parse(data)
     if err != nil {
         panic("java.lang.ClassFormatError")
     }

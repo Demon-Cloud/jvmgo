@@ -2,6 +2,7 @@
 package heap
 
 import (
+    "strings"
     "jvmgo/ch06/classfile"
 )
 
@@ -31,7 +32,7 @@ type Class struct {
     // 变量占据的空间大小
     staticSlotCount         uint
     // 实例占据的空间大小
-    staticVars              *Slots
+    staticVars              Slots
 }
 
 func newClass(cf *classfile.ClassFile) *Class {
@@ -52,7 +53,7 @@ func (self *Class) NewObject() *Object {
 
 // 判断类标志
 func (self *Class) IsPublic() bool {
-    return 0 ! self.accessFlags & ACC_PUBLIC
+    return 0 != self.accessFlags & ACC_PUBLIC
 }
 func (self *Class) IsFinal() bool {
     return 0 != self.accessFlags&ACC_FINAL
@@ -80,7 +81,7 @@ func (self *Class) IsEnum() bool {
 func (self *Class) ConstantPool() *ConstantPool {
     return self.constantPool
 }
-func (self *Class) staticVars() Slots {
+func (self *Class) StaticVars() Slots {
     return self.staticVars
 }
 
@@ -93,4 +94,18 @@ func (self *Class) getPackageName() string {
         return self.name[:i]
     }
     return ""
+}
+
+func (self *Class) GetMainMethod() *Method {
+    return self.getStaticMethod("main", "([Ljava/lang/String;)V")
+}
+
+func (self *Class) getStaticMethod(name, descriptor string) *Method {
+    for _, method := range self.methods {
+        if method.IsStatic() &&
+            method.name == name && method.descriptor == descriptor {
+            return method
+        }
+    }
+    return nil
 }

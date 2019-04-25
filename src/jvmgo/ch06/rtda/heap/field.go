@@ -47,6 +47,6 @@ func (self *Field) SlotId() uint {
     return self.slotId
 }
 
-func (self *Field) isLongOrDouble() bool {
+func (self *Field) IsLongOrDouble() bool {
     return self.descriptor == "J" || self.descriptor == "D"
 }

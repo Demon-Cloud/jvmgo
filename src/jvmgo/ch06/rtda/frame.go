@@ -1,6 +1,10 @@
 // frame.go
 package rtda
 
+import (
+    "jvmgo/ch06/rtda/heap"
+)
+
 // 栈帧
 type Frame struct {
     // 上一帧的地址,用来实现链表数据
