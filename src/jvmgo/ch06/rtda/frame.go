@@ -11,15 +11,17 @@ type Frame struct {
     operandStack    *OperandStack
     // 当前线程
     thread          *Thread
+    method          *heap.Method
     // 下一条指令
     nextPC          int
 }
 
-func newFrame(thread *Thread, maxLocals, maxStack uint) *Frame {
+func newFrame(thread *Thread, method *heap.Method) *Frame {
     return &Frame {
         thread:         thread,
-        localVars:      newLocalVars(maxLocals),
-        operandStack:   newOperandStack(maxStack),
+        method:         method,
+        localVars:      newLocalVars(method.MaxLocals()),
+        operandStack:   newOperandStack(method.MaxStack()),
     }
 }
 
@@ -38,4 +40,8 @@ func (self *Frame) NextPC() int {
 }
 func (self *Frame) SetNextPC(nextPC int) {
     self.nextPC = nextPC
+}
+
+func (self *Frame) Method() *heap.Method {
+    return self.method
 }
