@@ -27,6 +27,25 @@ func (self *MethodRef) ResolvedMethod() *Method {
 
 // jvms8 5.4.3.3
 func (self *MethodRef) resolveMethodRef() {
-    //class := self.Class()
-    // todo
+    d := slef.cp.class 
+    c := self.ReslovedClass()
+    if c.IsInterface() {
+        panic("java.lang.IncompatibleClassChangeError")
+    }
+    method := lookupMethod(c, self.name, self.descriptor)
+    if method == nil {
+        panic("java.lang.NoSuchMethodError")
+    }
+    if !method.isAccessibleTo(d) {
+        panic("java.lang.IllegalAccessError")
+    }
+    self.method = method
+}
+
+func lookupMethod(class *Class, name, descriptor string) *Method {
+    method := LookupMethodInClass(class, name, descriptor)
+    if method == nil {
+        method = lookupMethodInInterfaces(class.interfaces, name, descriptor)
+    }
+    return method
 }
